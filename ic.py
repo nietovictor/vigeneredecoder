@@ -1,7 +1,12 @@
+import re
 from collections import Counter
 
 # https://alexbarter.com/statistics/index-of-coincidence/
-texto_cifrado = input("Introduce la palabra cifrada con Vigenere sin espacis y sin carácteres que no sean letras: ").upper()
+def limpiar_texto(texto):
+    return re.sub(r'[^A-Za-z]', '', texto).upper()
+
+texto_cifrado = input("Introduce la palabra o texto cifrada con Vigenere: ")
+texto_cifrado = limpiar_texto(texto_cifrado)
 icpromedio = input("¿Cuál es el IC promedio del idioma? ")
 
 def calcular_ic(texto):
@@ -35,5 +40,3 @@ for longitud, ic in resultados_ic.items():
 # Determina la longitud de clave más probable
 longitud_probable = min(resultados_ic, key=lambda x: abs(resultados_ic[x] - float(icpromedio)))
 print(f"\nLa longitud de clave más probable es: {longitud_probable}\n")
-    
-
